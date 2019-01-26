@@ -18,7 +18,7 @@ import java.util.List;
 
 public class OneHourAgoFragment extends Fragment {
 
-    private List<SmsModel> mList;
+    private List<SmsModel> mList = null;
     private RecyclerView mRecyclerView;
     private Context mContext;
     private SmsListItemAdapter mAdapter;
@@ -54,7 +54,7 @@ public class OneHourAgoFragment extends Fragment {
     }
 
     private void callRecyclerView() {
-        if (mList.size() > 0) {
+        if (mList != null && mList.size() > 0) {
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
             mRecyclerView.setLayoutManager(layoutManager);
             mAdapter = new SmsListItemAdapter(mContext, mList);

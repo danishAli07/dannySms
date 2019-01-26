@@ -54,7 +54,7 @@ public class TwelveHourAgoFragment extends Fragment {
     }
 
     private void callRecyclerView() {
-        if (mList.size() > 0) {
+        if (mList != null && mList.size() > 0) {
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
             mRecyclerView.setLayoutManager(layoutManager);
             mAdapter = new SmsListItemAdapter(mContext, mList);

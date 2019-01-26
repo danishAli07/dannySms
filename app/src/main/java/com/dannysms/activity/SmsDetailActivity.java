@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import com.dannysms.R;
@@ -43,7 +42,11 @@ public class SmsDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(mTitle);
         mTvMsg.setText(mMsg);
-        mTvTime.setText(Utils.getTimeInFormat(Long.parseLong(mTime)));
+        if (fromOrigin.equals("dashboard")) {
+            mTvTime.setText(Utils.getTimeInFormat(Long.parseLong(mTime)));
+        } else {
+            mTvTime.setText(mTime);
+        }
     }
 
     @Override
@@ -52,6 +55,7 @@ public class SmsDetailActivity extends AppCompatActivity {
             onBackPressed();
         } else {
             Intent intent = new Intent(this,DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
@@ -61,9 +65,10 @@ public class SmsDetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (fromOrigin.equals("dashboard")) {
-            onBackPressed();
+            super.onBackPressed();
         } else {
             Intent intent = new Intent(this,DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
